@@ -1,0 +1,65 @@
+﻿@model List<PekarnyaProject.Models.CartItem>
+@{
+    ViewData["Title"] = "Ваш кошик";
+    decimal total = 0;
+}
+
+<h1>🛒 Ваш кошик</h1>
+
+@if (Model != null && Model.Count > 0)
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Назва товару</th>
+                <th>Кількість</th>
+                <th>Ціна за одиницю</th>
+                <th>Сума</th>
+                <th></th> @* Для кнопки "Видалити" *@
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                // Перевірка, щоб уникнути помилок, якщо продукт не знайдено в тестовому списку
+                if (item != null)
+                {
+                    decimal itemTotal = item.Quantity * item.Product.Price;
+                    total += itemTotal;
+
+                    <tr>
+                        <td>@item.Product.Name</td>
+                        <td>@item.Quantity</td>
+                        <td>@item.Product.Price.ToString("0.00") грн</td>
+                        <td>@itemTotal.ToString("0.00") грн</td>
+                        <td>
+                            <form asp-controller="Cart" asp-action="RemoveFromCart" method="post">
+                                <input type="hidden" name="productId" value="@item.ProductId" />
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Видалити</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-right"><strong>Загальна сума:</strong></td>
+                <td><strong>@total.ToString("0.00") грн</strong></td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div class="text-right">
+        <a asp-controller="Cart" asp-action="Checkout" class="btn btn-success btn-lg">Оформити замовлення</a>
+    </div>
+}
+else
+{
+    <div class="alert alert-info" role="alert">
+        Ваш кошик порожній. Додайте продукти, щоб продовжити.
+    </div>
+}
+
+<a asp-controller="Home" asp-action="Products" class="btn btn-primary mt-3">Продовжити покупки</a>

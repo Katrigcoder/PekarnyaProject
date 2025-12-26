@@ -1,0 +1,91 @@
+﻿@model List<PekarnyaProject.Models.Product>
+
+@{
+    ViewData["Title"] = "Каталог Продукції";
+}
+
+<h1> 🥯Каталог Продукції Пекарні "Смаколик"</h1>
+<hr />
+
+
+@if (TempData["CartMessage"] != null)
+{
+    <div class="alert alert-success mt-2">@TempData["CartMessage"]</div>
+}
+
+
+
+
+
+@if (Model != null)
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+        
+        <td>
+            <div\ class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Наші смаколики</h2>
+        @* Кнопка переходу до кошика *@
+        <a asp-controller="Cart" asp-action="Index" class="btn btn-outline-primary shadow-sm">
+             🛒 Перейти до кошика
+        </a>
+    </div>
+        </td>
+            
+          
+            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Продукція</th>
+                        <th class="text-center">Кількість</th>
+                        <th class="text-right">Ціна</th>
+                        <th></th>
+                    </tr>
+                </thead>
+            <tbody>
+             <tbody>
+
+@foreach (var product in Model)
+{
+    <tr>
+        <td>
+            <div style="font-weight: bold;">@product.Name</div>
+            <div class="text-muted small">@product.Description</div>
+        </td>
+
+        <td style="vertical-align: middle;">
+            <form asp-controller="Cart" asp-action="AddToCart" method="post" class="d-flex align-items-center">
+                <input type="hidden" name="productId" value="@product.Id" />
+                
+                <input type="number" name="quantity" value="1" min="1" 
+                       class="form-control text-center me-2" style="width: 70px;" />
+                
+                <button type="submit" class="btn btn-success btn-sm">До кошика</button>
+            </form>
+        </td>
+
+        <td style="vertical-align: middle; text-align: right; white-space: nowrap;">
+            @product.Price.ToString("F2") грн
+        </td>
+    </tr>
+}
+</tbody>           
+            <tbody/>
+            </table>
+            
+        <tbody/>
+    </table/>
+}
+else
+{
+    <p>Наразі каталог порожній.</p>
+}
+
+<a asp-controller="Cart" asp-action="Index"
+   class="btn btn-success btn-lg shadow"
+   style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; border-radius: 50px; padding: 15px 25px;">
+    🛒 Кошик
+</a>

@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Новая папка4\**" />
+    <Compile Remove="Новая папка5\**" />
+    <Compile Remove="Новая папка6\**" />
+    <Content Remove="Новая папка4\**" />
+    <Content Remove="Новая папка5\**" />
+    <Content Remove="Новая папка6\**" />
+    <EmbeddedResource Remove="Новая папка4\**" />
+    <EmbeddedResource Remove="Новая папка5\**" />
+    <EmbeddedResource Remove="Новая папка6\**" />
+    <None Remove="Новая папка4\**" />
+    <None Remove="Новая папка5\**" />
+    <None Remove="Новая папка6\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\Infrastructure.cs" />
+    <Compile Remove="Controllers\_context.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Cart\Index.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="10.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>

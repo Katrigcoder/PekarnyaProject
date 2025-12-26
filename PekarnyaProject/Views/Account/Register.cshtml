@@ -1,0 +1,30 @@
+﻿@model PekarnyaProject.Models.LoginViewModel
+@{
+    ViewData["Title"] = "Реєстрація";
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-4">
+        <div class="card shadow">
+            <div class="card-header bg-success text-white text-center">
+                <h4>Реєстрація</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="Register" method="post">
+                    <div class="mb-3">
+                        <label>Придумайте логін</label>
+                        <input asp-for="Username" class="form-control" required />
+                    </div>
+                    <div class="mb-3">
+                        <label>Придумайте пароль</label>
+                        <input asp-for="Password" type="password" class="form-control" required />
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">Зареєструватися</button>
+                </form>
+            </div>
+            <div class="card-footer text-center">
+                <a asp-action="Login">Вже є аккаунт? Увійти</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+﻿@model PekarnyaProject.Models.LoginViewModel
+@{
+    ViewData["Title"] = "Вхід до системи";
+}
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
+}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4>Авторизація</h4>
+                </div>
+                <div class="card-body">
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-danger">@ViewBag.Error</div>
+                    }
+                      
+                    <form asp-action="Login" method="post">
+                        <div class="mb-3">
+                            <label class="form-label">Логін</label>
+                            <input asp-for="Username" class="form-control" placeholder="Введіть логін" required />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Пароль</label>
+                            <input asp-for="Password" type="password" class="form-control" placeholder="Введіть пароль" required />
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Увійти</button>
+                    </form>
+                </div>
+                <div class="card-footer text-muted text-center">
+                    <small>admin / 123</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mt-3 text-center">
+    <span>Немає аккаунту? </span>
+    <a asp-action="Register">Зареєструватися</a>
+</div>
